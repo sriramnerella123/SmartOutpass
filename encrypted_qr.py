@@ -2,7 +2,6 @@ import qrcode
 from datetime import datetime
 from cryptography.fernet import Fernet
 
-team_id = "S789"
 result = {"verified":True}
 if result["verified"]:
     print("Access Verified")
