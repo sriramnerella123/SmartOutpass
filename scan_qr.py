@@ -1,34 +1,26 @@
 import cv2
 import pymysql
 import os
+from database import get_connection
 
-conn = pymysql.connect(
-    host = "localhost",
-    user = "root",
-    password = "k@nthi123",
-    database = "outpass_management"
-)
+conn = get_connection()
 cursor = conn.cursor()
 detector = cv2.QRCodeDetector()
 cap = cv2.VideoCapture(0)
 scanned = False
-
 while True:
     ret,frame = cap.read()
     data,bbox,_ = detector.detectAndDecode(frame)
-    
     if data and not scanned:
         scanned = True
         team_id = data.strip()
         print("Qr scanned:",team_id)
-        
         query = """
         SELECT Parent_photo
         FROM students
         WHERE Team_id = %s
         LIMIT 1
         """
-        
         cursor.execute(query,(team_id,))
         result = cursor.fetchone()
         print("Query Res:",result)
