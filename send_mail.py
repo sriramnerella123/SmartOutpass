@@ -1,7 +1,7 @@
 import smtplib
 from email.message import EmailMessage
 from database import get_connection
-import pymysql
+
 
 def send_qr_mail(team_id):
     conn = get_connection()
@@ -17,14 +17,14 @@ def send_qr_mail(team_id):
     emails = cursor.fetchall()
 
     server = smtplib.SMTP_SSL("smtp.gmail.com",465)
-    server.login("college@gmail.com","APP_PASSWORD")
+    server.login("rguktoutpass@gmail.com","avar drbn ryuc hkht")
     
     for e in emails:
         msg = EmailMessage()
         msg["Subject"] = "Exit QR Code"
-        msg["From"] = "college@gmail.com"
+        msg["From"] = "rguktoutpass@gmail.com"
         msg["To"] = e[0]
-        msg.set_content("Your team exit Qr code is attached")
+        msg.set_content("Your team exit Qr code is attached Now You can leave")
     
         with open("encrypted_qr.png","rb") as f:
             file_data = f.read()
