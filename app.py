@@ -2,7 +2,7 @@ from flask import Flask,request,jsonify
 import pymysql
 from generate_qr import generate_qr
 from send_mail import send_qr_mail
-from encrypt_qr import encrypt_qr
+from encrypted_qr import encrypt_qr
 from exit_scan import scan_exit
 from database import get_connection
 
@@ -66,7 +66,7 @@ def security_verify():
     return jsonify({
       "status":"verified",
       "tea_id":team_id,
-      "qr":"encrypted_qr"
+      "qr":"encrypted_qr",
       "message":"Encrypted QR sent to all team members"
     })
 @app.route("/scan_qr",methods=["POST"])

@@ -3,7 +3,7 @@ from email.message import EmailMessage
 from database import get_connection
 import pymysql
 
-def send_exit_qr(team_id):
+def send_qr_mail(team_id):
     conn = get_connection()
     cursor = conn.cursor()
     query = """
